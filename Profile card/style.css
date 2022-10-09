@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+*
+{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg ,#ff5acd,lightyellow,blue);
+}
+
+.card
+{   
+    position: relative;
+    width: 350px;
+    height: 190px;
+    background:#fff;
+    border-radius:20px;
+    box-shadow: 0 35px 80px rgba(0,0,0,0.15);
+    transition: 0.5s;
+}
+.card:hover
+{
+    height:450px;
+}
+.imgBx
+{
+    position: absolute;
+    left:50%;
+    top:-50px;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+    overflow: hidden;
+    transition: 0.5s;
+}
+.card:hover .imgBx
+{
+    width:250px;
+    height:250px;
+}
+
+.imgBx img
+{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .content
+{
+position: absolute;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: flex-end;
+overflow:hidden;
+}
+
+.card .content .details
+{
+    padding: 40px;
+    text-align:center;
+    width: 100%;
+    transition: 0.5s;
+    transform: translateY(150px);
+}
+
+.card:hover .content .details
+{
+    transform: translateY(0px);
+}
+
+.card .content .details h2
+{
+    font-size: 0.55cm;
+    font-weight: 600;
+    color: #555;
+    line-height: 0.65cm;
+}
+
+.card .content .details h2 span
+{
+    font-size: 0.45cm;
+    font-weight: 500;
+    opacity: 0.5;
+}
+
+.card .content .details .data
+{
+    display: flex;
+    justify-content: space-between;
+    margin:20px 0; 
+}
+.card .content .details .data h3
+{
+    font-size: 0.55cm;
+    color:#555;
+    line-height: 0.65cm;
+    font-weight: 600;
+}
+.card .content .details .data h3 span
+{
+    font-size: 0.55cm;
+    font-weight: 400;
+    opacity:0.5;
+}
+
+.card .content .details .actionBtn
+{
+    display: flex;
+    justify-content: space-between;
+    /*gap:20px;*/
+}
+.card .content .details .actionBtn button
+{
+    padding: 10px 30px;
+    border-radius: 5px;
+    border:none;
+    outline:none;
+    font-size: 0.55cm;
+    font-weight: 500;
+    background: #ff5f95;
+    color:#fff;
+    cursor: pointer;
+}
+
+.card .content .details .actionBtn button:nth-child(2)
+{
+    border: 1px solid #999;
+    color: #999;
+    background:#fff;
+
+}
+.actionBtn #follow{
+    background-color:#ff5f95 ;
+    border:1px solid #ff5f95;
+    color: #fff;
+    font-weight: 500;
+    transition:all 0.3s;
+}
+.actionBtn #follow:hover
+{
+    background-color:deeppink;
+
+}
+
+.actionBtn #Message{
+    background-color:transparent ;
+    border:1px solid grey;
+    color:grey;
+    font-weight: 500;
+    transition:all 0.3s linear;
+}
+.actionBtn #Message:hover{
+    color:#fff;
+    background-color: darkgray;
+}
+
+.card .imgBx:hover::before{
+    content: "";
+    position: relative;
+    width: 350px;
+    height: 190px;
+    background: linear-gradient(#00ccff,#d400d4);
+    animation: animate 4s linear infinite;
+}
+.card .imgBx:hover::after{
+    content: "";
+    position: relative;
+    background: #0e1538;
+    border-radius: 16px;
+    inset: 4px;
+    
+}
+@keyframes animate {
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
