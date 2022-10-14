@@ -1,0 +1,29 @@
+h1{
+    color: black;
+    text-align: center;
+}
+p{
+    text-align: center;
+    color: aliceblue;
+
+}
+body{
+    background-color: green;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+button{
+    color:#016f32;
+    width: 150px;
+    background: goldenrod;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    
+    
+}
+#new{
+    margin-top: 5px;
+}
