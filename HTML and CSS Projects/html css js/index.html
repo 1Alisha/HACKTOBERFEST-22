@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Phone</title>
+  </head>
+  <body>
+    <div class="main">
+      <nav>
+        <div class="logo">
+          <img
+            src="img/Apple-logo-black-and-white.png"
+            height="150"
+            width="150"
+          />
+        </div>
+        <div class="nav-links">
+          <ul>
+            <li>
+              <a href="#">Home</a>
+            </li>
+
+            <li><a href="#">Phone</a></li>
+            <li>
+              <a href="#">Accessories</a>
+            </li>
+            <li><a href="#">Cart</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="information">
+        <div class="overlay"></div>
+        <img
+          src="img/png-clipart-iphone-x-front-view-apple__-iphone.png"
+          class="mobile"
+        />
+        <div id="circle">
+          <div class="feature one">
+            <img src="img/bi_camera (1).png" alt="" />
+            <div>
+              <h1>Camera</h1>
+              <p>12mp, Wide Angle Lens</p>
+            </div>
+          </div>
+          <div class="feature two">
+            <img src="img/ion_hardware-chip-outline.png" alt="" />
+            <div>
+              <h1>Processor</h1>
+              <p>Apple A13</p>
+            </div>
+          </div>
+          <div class="feature three">
+            <img src="img/bi_phone (1).png" alt="" />
+            <div>
+              <h1>Display</h1>
+              <p>6.5' Mini-Drop FullScreen</p>
+            </div>
+          </div>
+          <div class="feature four">
+            <img src="img/akar-icons_battery-charging (1).png" alt="" />
+            <div>
+              <h1>Battery Life</h1>
+              <p>5000mAh, 750H Stanby</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <img src="img/akar-icons_arrow-down.png" id="upBtn" />
+        <h3>Features</h3>
+        <img src="img/akar-icons_arrow-down.png" id="downBtn" />
+      </div>
+    </div>
+    <script>
+      var circle = document.getElementById("circle");
+      var upBtn = document.getElementById("upBtn");
+      var downBtn = document.getElementById("downBtn");
+
+      var rotateValue = circle.style.transform;
+      var rotateSum;
+
+      upBtn.onclick = function () {
+        rotateSum = rotateValue + "rotate(-90deg)";
+        circle.style.transform = rotateSum;
+        rotateValue = rotateSum;
+      };
+      downBtn.onclick = function () {
+        rotateSum = rotateValue + "rotate(90deg)";
+        circle.style.transform = rotateSum;
+        rotateValue = rotateSum;
+      };
+    </script>
+  </body>
+</html>
