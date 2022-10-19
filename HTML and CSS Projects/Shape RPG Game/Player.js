@@ -8,6 +8,7 @@ class Player  {
     maxSpeed = 5;
     bulletSpeed = 10;
     bulletArray = []
+    maxBulletDistance = 300;
 
     ctx;
     canvas;
@@ -31,7 +32,9 @@ class Player  {
             // console.log(this.speed)
          }
     }
-    createBullet =  ()=>{}
+    createBullet =  ()=>{
+        this.bulletArray.push({x:this.x, y:this.y, angle:this.angle, distanceTraveled: 0})
+    }
     addKeyControls = ()=>{
         
             addEventListener('keydown', (e)=>{
@@ -73,7 +76,7 @@ class Player  {
                     // this.vectorPhysics()
             })
             addEventListener('mousedown', (e)=>{
-                
+                this.createBullet()
             })
     }
 
@@ -127,6 +130,22 @@ class Player  {
             return [x-left, y-top]
         }
 
+        renderBullet = ()=>{
+            for(let i = 0; i < this.bulletArray.length; i++){
+                let bullet = this.bulletArray[i];
+                this.ctx.beginPath()
+                this.ctx.arc(bullet.x, bullet.y, 2, 0, Math.PI * 2, true);
+                this.ctx.fill()
+                this.ctx.closePath()
+                bullet.x -= this.bulletSpeed * Math.cos(bullet.angle+Math.PI/2)
+                bullet.y -=  this.bulletSpeed * Math.sin(bullet.angle+Math.PI/2)
+                bullet.distanceTraveled += this.bulletSpeed
+                if(bullet.distanceTraveled > this.maxBulletDistance){
+                    this.bulletArray.splice(i,1)
+                }
+            }
+        }
+
         render = ()=>{
             
             let tempPoints = [[0, -this.size], [-this.size, this.size], [this.size, this.size]]
@@ -169,6 +188,7 @@ class Player  {
             this.ctx.stroke();
             this.ctx.restore()
             this.vectorPhysics()
+            this.renderBullet()
             // console.log(console.log(Math))
         } 
     }
