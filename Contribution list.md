@@ -7,4 +7,4 @@ This is a Contribution list for Hactoberfest PRs
 2.Ojaswi Pande
     Contribution=Add Trees and Linked List which is helpful for beginners.
 3.Saikiran
-    Contribution=Addeed a additional model XGbooster in titanic_machine_learning_from_disaster and trained it.
+    Contribution=Added a additional model XGbooster in titanic_machine_learning_from_disaster and trained it like a new feature without disturbing the existing code.
