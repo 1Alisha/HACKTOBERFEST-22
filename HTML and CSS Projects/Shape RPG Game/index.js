@@ -6,7 +6,8 @@ class Game{
     canvas
     ctx
     mouse = {onCanvas:false, position: {x: -1, y: -1}}
-    bullets = []
+    bullets = [];
+    enemies = []
 
     newContainer = ()=>{
         document.body.innerHTML = "<canvas id=\"view\" style=\" background: #eeeeee;display:flex; justify-content:center; \"><canvas>"

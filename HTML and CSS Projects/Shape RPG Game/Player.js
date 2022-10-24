@@ -19,7 +19,12 @@ class Player  {
         this.canvas = canvas
         this.mouse = mouse 
     }
-
+    hitBoxCheck = ()=>{
+        this.x = this.x + this.size > this.canvas.width ? this.canvas.width - this.size : this.x;
+        this.y = this.y + this.size > this.canvas.height ? this.canvas.height - this.size: this.y;
+        this.x = this.x - this.size/2 < 0 ? this.size/2: this.x;
+        this.y = this.y - this.size/2 < 0 ? this.size/2: this.y;
+    }
     vectorPhysics = ()=>{
          if(this.keystate.w === true){
             this.speed <=this.maxSpeed ? this.speed +=0.1 : this.speed = this.maxSpeed;
@@ -33,7 +38,7 @@ class Player  {
          }
     }
     createBullet =  ()=>{
-        this.bulletArray.push({x:this.x, y:this.y, angle:this.angle, distanceTraveled: 0})
+        this.bulletArray.push({x:this.x, y:this.y+(10/3), angle:this.angle, distanceTraveled: 0})
     }
     addKeyControls = ()=>{
         
@@ -158,9 +163,9 @@ class Player  {
             this.ctx.beginPath();
             
             // triangle
-            this.ctx.translate(this.x+this.size/3,this.y+this.size/3);
+            this.ctx.translate(this.x,this.y+this.size/3);
             this.ctx.rotate(this.angle)
-            this.ctx.translate(-(this.x+this.size/3),-(this.y+this.size/3));
+            this.ctx.translate(-(this.x),-(this.y+this.size/3));
             this.ctx.moveTo(this.x + tempPoints[0][0], this.y+tempPoints[0][1]); //x,y values to start at
             this.ctx.lineTo(this.x+tempPoints[1][0], this.y+tempPoints[1][1]); //draws a line
             this.ctx.lineTo(this.x+tempPoints[2][0], this.y+tempPoints[2][1]); 
@@ -187,6 +192,7 @@ class Player  {
             this.ctx.arc(this.mouse.position.x, this.mouse.position.y, 5, 0, Math.PI * 2, true)
             this.ctx.stroke();
             this.ctx.restore()
+            this.hitBoxCheck()
             this.vectorPhysics()
             this.renderBullet()
             // console.log(console.log(Math))
