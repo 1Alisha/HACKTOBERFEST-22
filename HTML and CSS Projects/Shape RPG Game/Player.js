@@ -1,31 +1,29 @@
-class Player  {
-    x = 100;
-    y = 100;
-    clientX = 0;
-    clientY = 0;
-    angle = 0;
-    speed = 0;
-    maxSpeed = 5;
-    bulletSpeed = 10;
-    bulletArray = []
-    maxBulletDistance = 300;
+function Player(ctx, canvas, mouse, color)  {
+    this.x = 250;
+    this.y = 250;
+    this.clientX = 0;
+    this.clientY = 0;
+    this.angle = 0;
+    this.speed = 0;
+    this.maxSpeed = 5;
+    this.bulletSpeed = 15;
+    this.bulletArray = []
+    this.maxBulletDistance = 500;
+    this.color = color;
+    this.size;
 
-    ctx;
-    canvas;
-    mouse;
-    keystate={w:false, a:false, s:false, d:false};
-    constructor(ctx, canvas, mouse){
-        this.ctx = ctx
-        this.canvas = canvas
-        this.mouse = mouse 
-    }
-    hitBoxCheck = ()=>{
+    this.ctx = ctx
+    this.canvas = canvas
+    this.mouse = mouse 
+    this.keystate={w:false, a:false, s:false, d:false};
+    
+    this.outOfBoundsCheck = ()=>{
         this.x = this.x + this.size > this.canvas.width ? this.canvas.width - this.size : this.x;
         this.y = this.y + this.size > this.canvas.height ? this.canvas.height - this.size: this.y;
         this.x = this.x - this.size/2 < 0 ? this.size/2: this.x;
         this.y = this.y - this.size/2 < 0 ? this.size/2: this.y;
     }
-    vectorPhysics = ()=>{
+    this.vectorPhysics = ()=>{
          if(this.keystate.w === true){
             this.speed <=this.maxSpeed ? this.speed +=0.1 : this.speed = this.maxSpeed;
          }else if(this.keystate.w === false){
@@ -37,13 +35,12 @@ class Player  {
             // console.log(this.speed)
          }
     }
-    createBullet =  ()=>{
+    this.createBullet =  ()=>{
         this.bulletArray.push({x:this.x, y:this.y+(10/3), angle:this.angle, distanceTraveled: 0})
     }
-    addKeyControls = ()=>{
+    this.addKeyControls = ()=>{
         
             addEventListener('keydown', (e)=>{
-                console.log(e)
                 
                 if(e.keyCode===40||e.code==='KeyS'){
                     console.log("Guy go backwards")
@@ -85,14 +82,14 @@ class Player  {
             })
     }
 
-        updateAngle =  ()=>{
+        this.updateAngle =  ()=>{
             let distanceX = (this.mouse.position.x)-(this.x)
             let distanceY = ((this.mouse.position.y)-(this.y+ 10/3))
             
             this.angle = (Math.atan2(distanceY,distanceX)) - 3 *Math.PI/2
         }
 
-        addMouseControls = ()=>{
+        this.addMouseControls = ()=>{
             var mouse = (e)=> {
                 this.mouse.position = {x:e.offsetX, y:e.offsetY}
 
@@ -103,10 +100,10 @@ class Player  {
                 // console.log(e, this.mouse.position.x, this.mouse.position.y)
                 // console.log((player.angle *180/Math.PI)-360)
             }
-            document.onmousemove = mouse
+            canvas.onmousemove = mouse
         }
 
-        getRndColor = ()=>{
+        this.getRndColor = ()=>{
             var colorPossible = 'abcdefABCDEF1234567890'
             var colorString = '#'
             for(var i = 0; i < 6; i++){
@@ -115,7 +112,9 @@ class Player  {
             return colorString;
         }
 
-        create =(x, y, size, color)=>{
+        this.create =(x, y, size, color)=>{
+            this.x = x
+            this.y = y
             this.size = size;
             // this.speed = 20;
   
@@ -124,22 +123,23 @@ class Player  {
             //ctx.stroke()
         }
 
-        rotateFunc = ([x,y])=>{
+        this.rotateFunc = ([x,y])=>{
             // x-= this.size
             // y-= this.size
             //  return [(x * Math.cos(this.angle)) - (y * Math.sin(this.angle)) , (x * Math.sin(this.angle)) + (y * Math.cos(this.angle))];
             return
         }
-        addCanvasBoundaries = ([x, y])=>{
+        this.addCanvasBoundaries = ([x, y])=>{
             let {left, top} = this.canvas.getBoundingClientRect()
             return [x-left, y-top]
         }
 
-        renderBullet = ()=>{
+        this.renderBullet = ()=>{
             for(let i = 0; i < this.bulletArray.length; i++){
                 let bullet = this.bulletArray[i];
                 this.ctx.beginPath()
                 this.ctx.arc(bullet.x, bullet.y, 2, 0, Math.PI * 2, true);
+                this.ctx.fillStyle = "black"
                 this.ctx.fill()
                 this.ctx.closePath()
                 bullet.x -= this.bulletSpeed * Math.cos(bullet.angle+Math.PI/2)
@@ -151,7 +151,7 @@ class Player  {
             }
         }
 
-        render = ()=>{
+        this.render = ()=>{
             
             let tempPoints = [[0, -this.size], [-this.size, this.size], [this.size, this.size]]
         
@@ -159,7 +159,6 @@ class Player  {
 
             this.updateAngle()
             this.ctx.save();
-            // this.ctx.fillStyle = this.color
             this.ctx.beginPath();
             
             // triangle
@@ -170,6 +169,7 @@ class Player  {
             this.ctx.lineTo(this.x+tempPoints[1][0], this.y+tempPoints[1][1]); //draws a line
             this.ctx.lineTo(this.x+tempPoints[2][0], this.y+tempPoints[2][1]); 
             // this.ctx.lineTo(this.x + tempPoints[0][0], this.y+tempPoints[0][1]+this.size/3); //x,y values to start at
+            this.ctx.fillStyle = this.color
             this.ctx.fill()
             this.ctx.closePath();
             
@@ -192,9 +192,10 @@ class Player  {
             this.ctx.arc(this.mouse.position.x, this.mouse.position.y, 5, 0, Math.PI * 2, true)
             this.ctx.stroke();
             this.ctx.restore()
-            this.hitBoxCheck()
+            this.outOfBoundsCheck()
             this.vectorPhysics()
             this.renderBullet()
+            return this.bulletArray
             // console.log(console.log(Math))
         } 
     }
