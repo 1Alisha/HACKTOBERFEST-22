@@ -1,0 +1,178 @@
+A Machine Learning Tutorial With Examples: An Introduction to ML Theory and Its Applications
+This Machine Learning tutorial introduces the basics of ML theory, laying down the common themes and concepts, making it easy to follow the logic and get comfortable with the topic.
+
+Nick McCrea
+ByNick McCrea
+Nicholas is a professional software engineer with a passion for quality craftsmanship. He loves architecting and writing top-notch code.
+0SHARES
+Read the Spanishes version of this article translated by Marisela Ordaz
+Editor’s note: This article was updated on 09/12/22 by our editorial team. It has been modified to include recent sources and to align with our current editorial standards.
+
+Machine learning (ML) is coming into its own, with a growing recognition that ML can play a key role in a wide range of critical applications, such as data mining, natural language processing, image recognition, and expert systems. ML provides potential solutions in all these domains and more, and likely will become a pillar of our future civilization.
+
+The supply of expert ML designers has yet to catch up to this demand. A major reason for this is that ML is just plain tricky. This machine learning tutorial introduces the basic theory, laying out the common themes and concepts, and making it easy to follow the logic and get comfortable with machine learning basics.
+
+Machine learning tutorial illustration: This curious machine is learning machine learning, unsupervised.
+Machine Learning Basics: What Is Machine Learning?
+So what exactly is “machine learning” anyway? ML is a lot of things. The field is vast and is expanding rapidly, being continually partitioned and sub-partitioned into different sub-specialties and types of machine learning.
+
+There are some basic common threads, however, and the overarching theme is best summed up by this oft-quoted statement made by Arthur Samuel way back in 1959: “[Machine Learning is the] field of study that gives computers the ability to learn without being explicitly programmed.”
+
+In 1997, Tom Mitchell offered a “well-posed” definition that has proven more useful to engineering types: “A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.”
+
+“A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E." -- Tom Mitchell, Carnegie Mellon University
+So if you want your program to predict, for example, traffic patterns at a busy intersection (task T), you can run it through a machine learning algorithm with data about past traffic patterns (experience E) and, if it has successfully “learned,” it will then do better at predicting future traffic patterns (performance measure P).
+
+The highly complex nature of many real-world problems, though, often means that inventing specialized algorithms that will solve them perfectly every time is impractical, if not impossible.
+
+Real-world examples of machine learning problems include “Is this cancer?”, “What is the market value of this house?”, “Which of these people are good friends with each other?”, “Will this rocket engine explode on take off?”, “Will this person like this movie?”, “Who is this?”, “What did you say?”, and “How do you fly this thing?” All of these problems are excellent targets for an ML project; in fact ML has been applied to each of them with great success.
+
+ML solves problems that cannot be solved by numerical means alone.
+Among the different types of ML tasks, a crucial distinction is drawn between supervised and unsupervised learning:
+
+Supervised machine learning is when the program is “trained” on a predefined set of “training examples,” which then facilitate its ability to reach an accurate conclusion when given new data.
+Unsupervised machine learning is when the program is given a bunch of data and must find patterns and relationships therein.
+We will focus primarily on supervised learning here, but the last part of the article includes a brief discussion of unsupervised learning with some links for those who are interested in pursuing the topic.
+
+Supervised Machine Learning
+In the majority of supervised learning applications, the ultimate goal is to develop a finely tuned predictor function h(x) (sometimes called the “hypothesis”). “Learning” consists of using sophisticated mathematical algorithms to optimize this function so that, given input data x about a certain domain (say, square footage of a house), it will accurately predict some interesting value h(x) (say, market price for said house).
+
+In practice, x almost always represents multiple data points. So, for example, a housing price predictor might consider not only square footage (x1) but also number of bedrooms (x2), number of bathrooms (x3), number of floors (x4), year built (x5), ZIP code (x6), and so forth. Determining which inputs to use is an important part of ML design. However, for the sake of explanation, it is easiest to assume a single input value.
+
+Let’s say our simple predictor has this form:
+
+h of x equals theta 0 plus theta 1 times x
+where theta 0 and theta 1 are constants. Our goal is to find the perfect values of theta 0 and theta 1 to make our predictor work as well as possible.
+
+Optimizing the predictor h(x) is done using training examples. For each training example, we have an input value x_train, for which a corresponding output, y, is known in advance. For each example, we find the difference between the known, correct value y, and our predicted value h(x_train). With enough training examples, these differences give us a useful way to measure the “wrongness” of h(x). We can then tweak h(x) by tweaking the values of theta 0 and theta 1 to make it “less wrong”. This process is repeated until the system has converged on the best values for theta 0 and theta 1. In this way, the predictor becomes trained, and is ready to do some real-world predicting.
+
+Machine Learning Examples
+We’re using simple problems for the sake of illustration, but the reason ML exists is because, in the real world, problems are much more complex. On this flat screen, we can present a picture of, at most, a three-dimensional dataset, but ML problems often deal with data with millions of dimensions and very complex predictor functions. ML solves problems that cannot be solved by numerical means alone.
+
+With that in mind, let’s look at another simple example. Say we have the following training data, wherein company employees have rated their satisfaction on a scale of 1 to 100:
+
+Employee satisfaction rating by salary is a great machine learning example.
+First, notice that the data is a little noisy. That is, while we can see that there is a pattern to it (i.e., employee satisfaction tends to go up as salary goes up), it does not all fit neatly on a straight line. This will always be the case with real-world data (and we absolutely want to train our machine using real-world data). How can we train a machine to perfectly predict an employee’s level of satisfaction? The answer, of course, is that we can’t. The goal of ML is never to make “perfect” guesses because ML deals in domains where there is no such thing. The goal is to make guesses that are good enough to be useful.
+
+It is somewhat reminiscent of the famous statement by George E. P. Box, the British mathematician and professor of statistics: “All models are wrong, but some are useful.”
+
+The goal of ML is never to make “perfect” guesses because ML deals in domains where there is no such thing. The goal is to make guesses that are good enough to be useful.
+
+Machine learning builds heavily on statistics. For example, when we train our machine to learn, we have to give it a statistically significant random sample as training data. If the training set is not random, we run the risk of the machine learning patterns that aren’t actually there. And if the training set is too small (see the law of large numbers), we won’t learn enough and may even reach inaccurate conclusions. For example, attempting to predict companywide satisfaction patterns based on data from upper management alone would likely be error-prone.
+
+With this understanding, let’s give our machine the data we’ve been given above and have it learn it. First we have to initialize our predictor h(x) with some reasonable values of theta 0 and theta 1. Now, when placed over our training set, our predictor looks like this:
+
+h of x equals twelve plus 0 point two x
+Machine learning example illustration: A machine learning predictor over a training dataset.
+If we ask this predictor for the satisfaction of an employee making $60,000, it would predict a rating of 27:
+
+In this image, the machine has yet to learn to predict a probable outcome.
+It’s obvious that this is a terrible guess and that this machine doesn’t know very much.
+
+Now let’s give this predictor all the salaries from our training set, and note the differences between the resulting predicted satisfaction ratings and the actual satisfaction ratings of the corresponding employees. If we perform a little mathematical wizardry (which I will describe later in the article), we can calculate, with very high certainty, that values of 13.12 for theta 0 and 0.61 for theta 1 are going to give us a better predictor.
+
+h of x equals thirteen point one two plus 0 point six one x
+In this case, the machine learning predictor is getting closer.
+And if we repeat this process, say 1,500 times, our predictor will end up looking like this:
+
+h of x equals fifteen point five four plus 0 point seven five x
+With a lot of repetition, the machine learning process starts to take shape.
+At this point, if we repeat the process, we will find that theta 0 and theta 1 will no longer change by any appreciable amount, and thus we see that the system has converged. If we haven’t made any mistakes, this means we’ve found the optimal predictor. Accordingly, if we now ask the machine again for the satisfaction rating of the employee who makes $60,000, it will predict a rating of ~60.
+
+In this example, the machine has learned to predict a probable data point.
+Now we’re getting somewhere.
+
+Machine Learning Regression: A Note on Complexity
+The above example is technically a simple problem of univariate linear regression, which in reality can be solved by deriving a simple normal equation and skipping this “tuning” process altogether. However, consider a predictor that looks like this:
+
+Four dimensional equation example
+This function takes input in four dimensions and has a variety of polynomial terms. Deriving a normal equation for this function is a significant challenge. Many modern machine learning problems take thousands or even millions of dimensions of data to build predictions using hundreds of coefficients. Predicting how an organism’s genome will be expressed or what the climate will be like in 50 years are examples of such complex problems.
+
+Many modern ML problems take thousands or even millions of dimensions of data to build predictions using hundreds of coefficients.
+Fortunately, the iterative approach taken by ML systems is much more resilient in the face of such complexity. Instead of using brute force, a machine learning system “feels” its way to the answer. For big problems, this works much better. While this doesn’t mean that ML can solve all arbitrarily complex problems—it can’t—it does make for an incredibly flexible and powerful tool.
+
+Gradient Descent: Minimizing “Wrongness”
+Let’s take a closer look at how this iterative process works. In the above example, how do we make sure theta 0 and theta 1 are getting better with each step, not worse? The answer lies in our “measurement of wrongness”, along with a little calculus. (This is the “mathematical wizardry” mentioned to previously.)
+
+The wrongness measure is known as the cost function (aka loss function), J of theta. The input theta represents all of the coefficients we are using in our predictor. In our case, theta is really the pair theta 0 and theta 1. J of theta 0 and theta 1 gives us a mathematical measurement of the wrongness of our predictor is when it uses the given values of theta 0 and theta 1.
+
+The choice of the cost function is another important piece of an ML program. In different contexts, being “wrong” can mean very different things. In our employee satisfaction example, the well-established standard is the linear least squares function:
+
+Cost function expressed as a linear least squares function
+With least squares, the penalty for a bad guess goes up quadratically with the difference between the guess and the correct answer, so it acts as a very “strict” measurement of wrongness. The cost function computes an average penalty across all the training examples.
+
+Now we see that our goal is to find theta 0 and theta 1 for our predictor h(x) such that our cost function J of theta 0 and theta 1 is as small as possible. We call on the power of calculus to accomplish this.
+
+Consider the following plot of a cost function for some particular machine learning problem:
+
+This graphic depicts the bowl-shaped plot of a cost function for a machine learning example.
+Here we can see the cost associated with different values of theta 0 and theta 1. We can see the graph has a slight bowl to its shape. The bottom of the bowl represents the lowest cost our predictor can give us based on the given training data. The goal is to “roll down the hill” and find theta 0 and theta 1 corresponding to this point.
+
+This is where calculus comes in to this machine learning tutorial. For the sake of keeping this explanation manageable, I won’t write out the equations here, but essentially what we do is take the gradient of J of theta 0 and theta 1, which is the pair of derivatives of J of theta 0 and theta 1 (one over theta 0 and one over theta 1). The gradient will be different for every different value of theta 0 and theta 1, and defines the “slope of the hill” and, in particular, “which way is down” for these particular thetas. For example, when we plug our current values of theta into the gradient, it may tell us that adding a little to theta 0 and subtracting a little from theta 1 will take us in the direction of the cost function-valley floor. Therefore, we add a little to theta 0, subtract a little from theta 1, and voilà! We have completed one round of our learning algorithm. Our updated predictor, h(x) = theta 0 + theta 1x, will return better predictions than before. Our machine is now a little bit smarter.
+
+This process of alternating between calculating the current gradient and updating the thetas from the results is known as gradient descent.
+
+This image depicts an example of a machine learning gradient descent.
+This image depicts the number of iterations for this machine learning tutorial.
+That covers the basic theory underlying the majority of supervised machine learning systems. But the basic concepts can be applied in a variety of ways, depending on the problem at hand.
+
+Classification Problems in Machine Learning
+Under supervised ML, two major subcategories are:
+
+Regression machine learning systems – Systems where the value being predicted falls somewhere on a continuous spectrum. These systems help us with questions of “How much?” or “How many?”
+Classification machine learning systems – Systems where we seek a yes-or-no prediction, such as “Is this tumor cancerous?”, “Does this cookie meet our quality standards?”, and so on.
+As it turns out, the underlying machine learning theory is more or less the same. The major differences are the design of the predictor h(x) and the design of the cost function J of theta.
+
+Our examples so far have focused on regression problems, so now let’s take a look at a classification example.
+
+Here are the results of a cookie quality testing study, where the training examples have all been labeled as either “good cookie” (y = 1) in blue or “bad cookie” (y = 0) in red.
+
+This example shows how a machine learning regression predictor is not the right solution here.
+In classification, a regression predictor is not very useful. What we usually want is a predictor that makes a guess somewhere between 0 and 1. In a cookie quality classifier, a prediction of 1 would represent a very confident guess that the cookie is perfect and utterly mouthwatering. A prediction of 0 represents high confidence that the cookie is an embarrassment to the cookie industry. Values falling within this range represent less confidence, so we might design our system such that a prediction of 0.6 means “Man, that’s a tough call, but I’m gonna go with yes, you can sell that cookie,” while a value exactly in the middle, at 0.5, might represent complete uncertainty. This isn’t always how confidence is distributed in a classifier but it’s a very common design and works for the purposes of our illustration.
+
+It turns out there’s a nice function that captures this behavior well. It’s called the sigmoid function, g(z), and it looks something like this:
+
+h of x equals g of z
+The sigmoid function at work to accomplish a supervised machine learning example.
+z is some representation of our inputs and coefficients, such as:
+
+z equals theta 0 plus theta 1 times x
+so that our predictor becomes:
+
+h of x equals g of theta 0 plus theta 1 times x
+Notice that the sigmoid function transforms our output into the range between 0 and 1.
+
+The logic behind the design of the cost function is also different in classification. Again we ask “What does it mean for a guess to be wrong?” and this time a very good rule of thumb is that if the correct guess was 0 and we guessed 1, then we were completely wrong—and vice-versa. Since you can’t be more wrong than completely wrong, the penalty in this case is enormous. Alternatively, if the correct guess was 0 and we guessed 0, our cost function should not add any cost for each time this happens. If the guess was right, but we weren’t completely confident (e.g., y = 1, but h(x) = 0.8), this should come with a small cost, and if our guess was wrong but we weren’t completely confident (e.g., y = 1 but h(x) = 0.3), this should come with some significant cost but not as much as if we were completely wrong.
+
+This behavior is captured by the log function, such that:
+
+cost expressed as log
+Again, the cost function J of theta gives us the average cost over all of our training examples.
+
+So here we’ve described how the predictor h(x) and the cost function J of theta differ between regression and classification, but gradient descent still works fine.
+
+A classification predictor can be visualized by drawing the boundary line; i.e., the barrier where the prediction changes from a “yes” (a prediction greater than 0.5) to a “no” (a prediction less than 0.5). With a well-designed system, our cookie data can generate a classification boundary that looks like this:
+that looks like this:
+
+A graph of a completed machine learning example using the sigmoid function.
+Now that’s a machine that knows a thing or two about cookies!
+
+An Introduction to Neural Networks
+No discussion of Machine Learning would be complete without at least mentioning neural networks. Not only do neural networks offer an extremely powerful tool to solve very tough problems, they also offer fascinating hints at the workings of our own brains and intriguing possibilities for one day creating truly intelligent machines.
+
+Neural networks are well suited to machine learning models where the number of inputs is gigantic. The computational cost of handling such a problem is just too overwhelming for the types of systems we’ve discussed. As it turns out, however, neural networks can be effectively tuned using techniques that are strikingly similar to gradient descent in principle.
+
+A thorough discussion of neural networks is beyond the scope of this tutorial, but I recommend checking out previous post on the subject.
+
+Unsupervised Machine Learning
+Unsupervised machine learning is typically tasked with finding relationships within data. There are no training examples used in this process. Instead, the system is given a set of data and tasked with finding patterns and correlations therein. A good example is identifying close-knit groups of friends in social network data.
+
+The machine learning algorithms used to do this are very different from those used for supervised learning, and the topic merits its own post. However, for something to chew on in the meantime, take a look at clustering algorithms such as k-means, and also look into dimensionality reduction systems such as principle component analysis. You can also read our article on semi-supervised image classification.
+
+Putting Theory Into Practice
+We’ve covered much of the basic theory underlying the field of machine learning but, of course, we have only scratched the surface.
+
+Keep in mind that to really apply the theories contained in this introduction to real-life machine learning examples, a much deeper understanding of these topics is necessary. There are many subtleties and pitfalls in ML and many ways to be lead astray by what appears to be a perfectly well-tuned thinking machine. Almost every part of the basic theory can be played with and altered endlessly, and the results are often fascinating. Many grow into whole new fields of study that are better suited to particular problems.
+
+Clearly, machine learning is an incredibly powerful tool. In the coming years, it promises to help solve some of our most pressing problems, as well as open up whole new worlds of opportunity for data science firms. The demand for machine learning engineers is only going to grow, offering incredible chances to be a part of something big. I hope you will consider getting in on the action!
+
