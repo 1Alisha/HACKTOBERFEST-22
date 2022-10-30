@@ -8,6 +8,9 @@ function Game(){
     this.enemies = [];
     this.levelPlaying = false;
     this.currentLevel = 0;
+    this.notPaused =  true;
+    this.controller;
+    this.menu;
     this.newContainer = ()=>{
         document.body.innerHTML = `<canvas id=\"view\" style=\" background: #eeeeee;display:flex; justify-content:center; \"></canvas>
         <h1 style=\"display:flex; position:absolute; top: 20px; left: 50%; align-items: center; justify-content: center;\" id=\"LevelTitle\"></h1>
@@ -92,6 +95,9 @@ function Game(){
         canvas.height =  750;
         this.player =  new Player(ctx, canvas, this.mouse,"orange");
         this.player.create(375, 375, 10)
+        this.menu = new Menu(this)
+        this.controller =  new Controller(this.player, this.menu, this)
+        this.controller.start()
         this.draw()
        
     }
@@ -112,14 +118,20 @@ function Game(){
     
       
         ctx.clearRect(0, 0, canvas.width, canvas.height)
-        this.enemies.forEach(enemy => {
-            enemy.render()
-            enemy.move()
-            enemy.parallaxFunc();
-        });
-        this.bullets = this.player.render();
-        this.checkBulletHitBoxes()
-        this.checkEnemyAndPlayerColision()
+
+        if(this.notPaused){
+            this.enemies.forEach(enemy => {
+                enemy.render()
+                enemy.move()
+                enemy.parallaxFunc();
+            });
+            this.bullets = this.player.render();
+            this.checkBulletHitBoxes()
+            this.checkEnemyAndPlayerColision()
+
+        }else{
+           this.menu.render()
+        }
 
         // this.player.status();
         // if(jQuery.isEmptyObject(players)===false){
