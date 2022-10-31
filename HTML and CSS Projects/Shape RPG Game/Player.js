@@ -38,69 +38,13 @@ function Player(ctx, canvas, mouse, color)  {
     this.createBullet =  ()=>{
         this.bulletArray.push({x:this.x, y:this.y+(10/3), angle:this.angle, distanceTraveled: 0})
     }
-    this.addKeyControls = ()=>{
-        
-            addEventListener('keydown', (e)=>{
-                
-                if(e.keyCode===40||e.code==='KeyS'){
-                    console.log("Guy go backwards")
-                    // this.x +=  this.speed/2 * Math.cos(this.angle+Math.PI/2)
-                    // this.y +=  this.speed/2 * Math.sin(this.angle+Math.PI/2)
-                }else if(e.keyCode===38||e.code==='KeyW'){
-                    console.log("Guy go fowards") 
-                    // this.x -=  this.speed/2 * Math.cos(this.angle+Math.PI/2)
-                    // this.y -=  this.speed/2 * Math.sin(this.angle+Math.PI/2)
-                    this.keystate.w = true
-                }//if(e.keyCode===37||e.code==='KeyA'){
-                //     this.x +=  this.speed * Math.cos(this.angle)
-                //     this.y +=  this.speed * Math.sin(this.angle)
-                // }else if(e.keyCode===39||e.code==='KeyD'){
-                //     this.x -=  this.speed * Math.cos(this.angle)
-                //     this.y -=  this.speed * Math.sin(this.angle)
-                //}
-                // this.vectorPhysics()
-            })
-            
-            addEventListener('keyup', (e)=>{
-                //console.log(e.keyCode)
-                if(e.code==='KeyW'){//UP
-                    this.keystate.w = false
-
-                }
-                if(e.keyCode===40){//DOWN
-                }
-                // if(e.keyCode===39){//Right
-                //     diamond.x += 50
-                // }
-                // if(e.keyCode===37){//Left
-                //     diamond.x -= 50
-                // }
-                    // this.vectorPhysics()
-            })
-            addEventListener('mousedown', (e)=>{
-                this.createBullet()
-            })
-    }
+    
 
         this.updateAngle =  ()=>{
             let distanceX = (this.mouse.position.x)-(this.x)
             let distanceY = ((this.mouse.position.y)-(this.y+ 10/3))
             
             this.angle = (Math.atan2(distanceY,distanceX)) - 3 *Math.PI/2
-        }
-
-        this.addMouseControls = ()=>{
-            var mouse = (e)=> {
-                this.mouse.position = {x:e.offsetX, y:e.offsetY}
-
-                var fakex = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
-                this.updateAngle()
-                let {clientX, layerX, pageX, x, clientY} = e
-      
-                // console.log(e, this.mouse.position.x, this.mouse.position.y)
-                // console.log((player.angle *180/Math.PI)-360)
-            }
-            canvas.onmousemove = mouse
         }
 
         this.getRndColor = ()=>{
@@ -118,8 +62,6 @@ function Player(ctx, canvas, mouse, color)  {
             this.size = size;
             // this.speed = 20;
   
-            this.addKeyControls();
-            this.addMouseControls();
             //ctx.stroke()
         }
 
