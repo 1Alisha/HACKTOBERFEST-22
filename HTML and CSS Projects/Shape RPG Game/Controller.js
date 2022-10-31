@@ -2,6 +2,19 @@ function Controller(player, menu, game){
     this.player = player
     this.menu = menu
     this.game = game
+
+    this.boundaryTest = (e,{x, y, w, h})=>{
+        if(e.offsetX > x && e.offsetX < x + w && e.offsetY > y && e.offsetY < y + h){
+            return true
+        }else{
+            return false
+        }
+    }
+
+    this.closeMenu = ()=>{
+        
+    }
+
     this.addKeyControls = ()=>{
         
         addEventListener('keydown', (e)=>{
@@ -20,6 +33,7 @@ function Controller(player, menu, game){
                 if(!this.menu.isOpen){
                     this.game.notPaused = false
                     this.menu.isOpen = true;
+                    this.menu.menuType = "pause"
                 }else{
                     this.game.notPaused = true;
                     this.menu.isOpen = false;
@@ -45,7 +59,24 @@ function Controller(player, menu, game){
                 // this.vectorPhysics()
         })
         addEventListener('mousedown', (e)=>{
-            this.player.createBullet()
+            let {offsetX, offsetY} = e
+            if(this.game.notPaused){
+                this.player.createBullet()
+            }
+            if(this.menu.isOpen){
+                if(this.menu.menuType === "pause"){
+                    if(this.boundaryTest({offsetX,offsetY}, this.menu.pauseButtons.closeBtn)){
+                        console.log('escaped')
+                            this.game.notPaused = true;
+                            this.menu.isOpen = false;
+                    }
+                    if(this.boundaryTest({offsetX,offsetY}, this.menu.pauseButtons.newGameBtn)){
+                        this.game.notPaused = true;
+                        this.menu.isOpen = false;
+                        this.game.newGame()
+                    }
+                }
+            }
         })
     }
     this.addMouseControls = ()=>{
