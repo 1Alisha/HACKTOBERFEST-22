@@ -17,6 +17,11 @@ function Game(){
         `
         
     }
+
+    this.newGame = ()=>{
+        let newThis = Object.assign(this, new Game());
+        newThis.start()
+    }
     this.nextLevel = ()=>{
         if(this.currentLevel){
             for(let i = 0; i< this.currentLevel % 10; i++){
